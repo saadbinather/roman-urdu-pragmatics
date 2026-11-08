@@ -9,7 +9,7 @@
 
 ## Next batches
 
-1. Add a command-line inference workflow that wires the Transformers adapter to the runner and manifest writer.
+1. Add multi-model adapters and a command-line inference workflow with resource/cost documentation.
 2. Convert the notebook's expanded dataset generation into a reviewed data-construction module.
 3. Add bootstrap confidence intervals and paired permutation tests after preregistering the estimands.
 4. Add annotation agreement reports and an adjudication workflow.

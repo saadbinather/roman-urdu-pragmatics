@@ -39,11 +39,12 @@ Use **`roman-urdu-pragmatics-pilot`** for the GitHub repository. It is specific 
 python -m pip install -e '.[dev]'
 validate-ru-pragmatics validate --data 'roman_urdu_research_final (1)/data/evaluation_dataset.csv'
 validate-ru-pragmatics report --predictions results/generated/predictions.csv --output results/generated/report.md
+validate-ru-pragmatics infer --config configs/pilot.yaml --run-id pilot-001
 ```
 
 No inference is run by the repository bootstrap step.
 
-The Transformers adapter is opt-in and requires the `inference` extra. Report generation works from saved prediction CSVs and does not load model weights.
+The Transformers adapter is opt-in and requires the `inference` extra. The `infer` command downloads/loads model weights only when explicitly invoked. Report generation works from saved prediction CSVs and does not load model weights.
 
 ## Engineering principles
 
