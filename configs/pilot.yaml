@@ -1,0 +1,21 @@
+study_id: ru_pragmatics_pilot_v1
+seed: 42
+data:
+  evaluation: roman_urdu_research_final (1)/data/evaluation_dataset.csv
+  id_column: id
+  pair_column: pair_id
+  language_column: language
+  label_column: gold_intent
+  text_column: text
+  context_column: context
+model:
+  id: Qwen/Qwen2.5-3B-Instruct
+  decoding: greedy
+  temperature: 0.0
+  max_new_tokens: 32
+task:
+  labels: [PRAISE, CRITICISM, DISAGREEMENT, UNCERTAINTY, REASSURANCE, COMMITMENT, CONCERN]
+  conditions: [with_context, without_context]
+  languages: [English, Roman_Urdu, Code_Switch]
+outputs:
+  directory: results/generated
