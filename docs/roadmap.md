@@ -9,7 +9,7 @@
 
 ## Next batches
 
-1. Add a model adapter that records raw outputs and run manifests.
+1. Add a concrete Transformers model adapter that records raw outputs and run manifests.
 2. Convert the notebook's expanded dataset generation into a reviewed data-construction module.
 3. Add bootstrap confidence intervals and paired permutation tests after preregistering the estimands.
 4. Add annotation agreement reports and an adjudication workflow.

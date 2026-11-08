@@ -51,3 +51,4 @@ No inference is run by the repository bootstrap step.
 - Paired scenario families are the comparison unit; item counts alone are not evidence of independent replication.
 - Invalid or ambiguous model outputs are retained and reported, never silently coerced.
 - New examples must carry provenance and annotation status (`draft`, `reviewed`, or `adjudicated`).
+- Inference is resumable by stable item ID and preserves raw model output for audit.
