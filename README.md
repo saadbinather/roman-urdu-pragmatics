@@ -1,55 +1,74 @@
 # Roman Urdu Pragmatics Pilot
 
-Research-engineering repository for a controlled pilot study of pragmatic intent classification in English, Roman Urdu, and code-switched text.
+This repository contains a small research-engineering pilot on pragmatic intent classification across English, Roman Urdu, and code-switched messages.
 
-## Research question
+The work was completed for the **Fatima Institute Fellowship Task** as an initial study design and reproducibility exercise. It shows how a research question can be translated into a documented, testable computational workflow.
 
-Do instruction-tuned language models interpret context-dependent pragmatic intent differently across English, Roman Urdu, and code-switched messages?
+## Overview
 
-This repository is an **analysis scaffold**, not a claim of population-level language disparity. The current dataset is researcher-authored and requires human validation before publication.
+The pilot asks whether an instruction-tuned language model interprets context-dependent communicative intent differently across matched language variants.
 
-## Current pilot
+The current evaluation uses researcher-authored examples with contextual conditions and the following intent labels:
 
-- Model: Qwen2.5-3B-Instruct
-- Task: context-conditioned intent classification
-- Languages: English, Roman Urdu, code-switching
-- Intents: praise, criticism, disagreement, uncertainty, reassurance, commitment, concern
-- Existing pilot artifacts: 12 scenario families and 72 context-conditioned items
+`PRAISE`, `CRITICISM`, `DISAGREEMENT`, `UNCERTAINTY`, `REASSURANCE`, `COMMITMENT`, and `CONCERN`.
 
-The original notebook and exported results are retained in the existing `roman_urdu_research_final (1)/` export. They are useful provenance, but the canonical implementation will live under `src/`.
+The initial model configuration uses Qwen2.5-3B-Instruct. Existing pilot artifacts include 12 scenario families and 72 context-conditioned items.
 
-## Repository layout
+## Scope and status
+
+This is a pilot instrument, not a population-representative benchmark. The current labels require independent human review, and the existing results should be interpreted as model- and dataset-specific observations. They should not be read as evidence about the ability of Roman Urdu speakers or about language communities generally.
+
+The repository is structured so that annotation, model comparison, preregistration, and larger-scale evaluation can be added without rewriting the core workflow.
+
+## Repository structure
 
 ```text
 configs/       Versioned experiment configuration
-data/          Dataset documentation and local data drop-in point
-docs/          Study protocol, annotation plan, and analysis notes
-legacy/        Original notebook and exported pilot artifacts
-src/           Reusable package code
-tests/         Small deterministic tests for data and metrics
+data/          Data documentation and annotation template
+docs/          Study protocol, data statement, and research roadmap
+src/           Reusable validation, inference, evaluation, and reporting code
+tests/         Deterministic unit tests and mock-model tests
+roman_urdu_research_final (1)/
+               Original notebook export and pilot artifacts
 ```
 
-## Suggested project name
+## Reproducible workflow
 
-Use **`roman-urdu-pragmatics-pilot`** for the GitHub repository. It is specific enough for discovery, broad enough to support later model comparisons, and accurately signals that this is a pilot rather than a definitive benchmark.
-
-## Planned commands
+Install the analysis and development dependencies:
 
 ```bash
 python -m pip install -e '.[dev]'
+```
+
+Validate the evaluation data:
+
+```bash
 validate-ru-pragmatics validate --data 'roman_urdu_research_final (1)/data/evaluation_dataset.csv'
+```
+
+Generate a report from saved predictions:
+
+```bash
 validate-ru-pragmatics report --predictions results/generated/predictions.csv --output results/generated/report.md
+```
+
+Inference is opt-in. To load the configured model, install the inference dependencies and provide an explicit run ID:
+
+```bash
+python -m pip install -e '.[inference]'
 validate-ru-pragmatics infer --config configs/pilot.yaml --run-id pilot-001
 ```
 
-No inference is run by the repository bootstrap step.
+Every run is designed to retain its raw model outputs, parsed labels, model identifier, prompt version, seed, and run manifest. Inference can resume from an existing prediction file by item ID.
 
-The Transformers adapter is opt-in and requires the `inference` extra. The `infer` command downloads/loads model weights only when explicitly invoked. Report generation works from saved prediction CSVs and does not load model weights.
+## Research safeguards
 
-## Engineering principles
+- Matched scenario families are treated as the comparison unit.
+- Invalid or ambiguous model outputs are retained rather than silently coerced.
+- New examples require provenance and an annotation status.
+- Synthetic augmentation, if added, will remain separate from confirmatory estimates.
+- Future publication should include independent annotation, agreement statistics, a preregistered analysis, and comparisons across multiple models and prompts.
 
-- Every prediction must retain the raw model output, parsed label, prompt version, model identifier, and run seed.
-- Paired scenario families are the comparison unit; item counts alone are not evidence of independent replication.
-- Invalid or ambiguous model outputs are retained and reported, never silently coerced.
-- New examples must carry provenance and annotation status (`draft`, `reviewed`, or `adjudicated`).
-- Inference is resumable by stable item ID and preserves raw model output for audit.
+## Development status
+
+The project is an active pilot scaffold. The original notebook and exported results are retained for provenance; the modular implementation under `src/` is the basis for future runs.
