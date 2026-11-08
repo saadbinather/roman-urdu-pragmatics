@@ -18,6 +18,9 @@ inference = ["accelerate>=0.30", "torch>=2.2", "transformers>=4.45,<5"]
 plots = ["matplotlib>=3.8", "seaborn>=0.13"]
 dev = ["pytest>=8", "ruff>=0.6"]
 
+[project.scripts]
+validate-ru-pragmatics = "roman_urdu_pragmatics.cli:main"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 

@@ -44,3 +44,10 @@ python -m roman_urdu_pragmatics.make_report --config configs/pilot.yaml
 ```
 
 No inference is run by the repository bootstrap step.
+
+## Engineering principles
+
+- Every prediction must retain the raw model output, parsed label, prompt version, model identifier, and run seed.
+- Paired scenario families are the comparison unit; item counts alone are not evidence of independent replication.
+- Invalid or ambiguous model outputs are retained and reported, never silently coerced.
+- New examples must carry provenance and annotation status (`draft`, `reviewed`, or `adjudicated`).
