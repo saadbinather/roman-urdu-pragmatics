@@ -1,6 +1,6 @@
-# Roman Urdu Pragmatics Pilot
+# Roman Urdu Pragmatics 
 
-This repository contains a small research-engineering pilot on pragmatic intent classification across English, Roman Urdu, and code-switched messages.
+This repo was built for research-task on pragmatic intent classification across English, Roman Urdu.
 
 The work was completed for the **Fatima Institute Fellowship Task** as an initial study design and reproducibility exercise. It shows how a research question can be translated into a documented, testable computational workflow.
 
@@ -14,9 +14,6 @@ The current evaluation uses researcher-authored examples with contextual conditi
 
 The initial model configuration uses Qwen2.5-3B-Instruct. Existing pilot artifacts include 12 scenario families and 72 context-conditioned items.
 
-## Scope and status
-
-This is a pilot instrument, not a population-representative benchmark. The current labels require independent human review, and the existing results should be interpreted as model- and dataset-specific observations. They should not be read as evidence about the ability of Roman Urdu speakers or about language communities generally.
 
 The repository is structured so that annotation, model comparison, preregistration, and larger-scale evaluation can be added without rewriting the core workflow.
 
@@ -59,16 +56,3 @@ python -m pip install -e '.[inference]'
 validate-ru-pragmatics infer --config configs/pilot.yaml --run-id pilot-001
 ```
 
-Every run is designed to retain its raw model outputs, parsed labels, model identifier, prompt version, seed, and run manifest. Inference can resume from an existing prediction file by item ID.
-
-## Research safeguards
-
-- Matched scenario families are treated as the comparison unit.
-- Invalid or ambiguous model outputs are retained rather than silently coerced.
-- New examples require provenance and an annotation status.
-- Synthetic augmentation, if added, will remain separate from confirmatory estimates.
-- Future publication should include independent annotation, agreement statistics, a preregistered analysis, and comparisons across multiple models and prompts.
-
-## Development status
-
-The project is an active pilot scaffold. The original notebook and exported results are retained for provenance; the modular implementation under `src/` is the basis for future runs.
